@@ -1,15 +1,16 @@
 import { useState } from 'react'
+import { Stack, Typography } from '@mui/material'
 
 function Versions(): JSX.Element {
   const [versions] = useState(window.electron.process.versions)
 
   return (
-    <ul className="versions">
-      <li className="electron-version">Electron v{versions.electron}</li>
-      <li className="chrome-version">Chromium v{versions.chrome}</li>
-      <li className="node-version">Node v{versions.node}</li>
-      <li className="v8-version">V8 v{versions.v8}</li>
-    </ul>
+    <Stack spacing={3} direction={'row'} justifyContent={'center'} fontSize={'smaller'}>
+      <Typography fontSize={'inherit'}>Electron v{versions.electron}</Typography>
+      <Typography fontSize={'inherit'}>Chromium v{versions.chrome}</Typography>
+      <Typography fontSize={'inherit'}>Node v{versions.node}</Typography>
+      <Typography fontSize={'inherit'}>V8 v{versions.v8}</Typography>
+    </Stack>
   )
 }
 
