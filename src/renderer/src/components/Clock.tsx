@@ -1,13 +1,12 @@
 import { Stack, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { TimerContext } from '../context/TimerContextProvider'
 
-const Clock = () => {
+const Clock = (): JSX.Element => {
+  const context = useContext(TimerContext)
   const [time, setTime] = useState('')
-  const ipcRenderer = (window as any).electron.ipcRenderer
   useEffect(() => {
-    ipcRenderer.on('timestamp-tick', (event: any, arg: any) => {
-      setTime(arg)
-    })
+    context.pull((value) => setTime(value))
   })
   return (
     <Stack direction={'row'} justifyContent={'center'}>
