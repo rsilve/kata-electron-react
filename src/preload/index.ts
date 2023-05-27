@@ -1,16 +1,8 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
-export type AppAPI = { pull: (setter: (value: string) => void) => void }
+import { api } from './appAPI'
 
 // Custom APIs for renderer
-const api: AppAPI = {
-  pull: (setter: (value: string) => void): void => {
-    electronAPI.ipcRenderer.on('timestamp-tick', (_: unknown, arg: unknown) => {
-      setter(arg as string)
-    })
-  }
-}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

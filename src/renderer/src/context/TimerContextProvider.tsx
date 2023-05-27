@@ -1,21 +1,14 @@
-import { createContext } from 'react'
+import { createSignal } from '@react-rxjs/utils'
+import { bind } from '@react-rxjs/core'
 
-type TimerHelper = {
-  pull: (setter: (value: string) => void) => void
-}
+const [timer, setTimerValue] = createSignal<string>()
+const [useTimer] = bind(timer, new Date().toISOString())
 
-const DEFAULT: TimerHelper = {
-  pull: (): void => {}
-}
-export const TimerContext = createContext<TimerHelper>(DEFAULT)
-
-function initContext(window: Window): TimerHelper {
-  const api = window.api
-  return {
-    pull: api.pull
-  }
+export const useTimerContext = (): string => {
+  return useTimer()
 }
 
 export const TimerContextProvider = ({ children }: { children }): JSX.Element => {
-  return <TimerContext.Provider value={initContext(window)}>{children}</TimerContext.Provider>
+  window.api.listen(setTimerValue)
+  return <>{children}</>
 }

@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, Notification } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
@@ -35,7 +35,12 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  timer(mainWindow)
+  const timerInstance = timer(mainWindow)
+  timerInstance.addEventListener((value) => {
+    if (value.indexOf('16:27:00') >= 0) {
+      new Notification({ title: 'Test Notif', body: 'Great notif body, very useful' }).show()
+    }
+  })
 }
 
 // This method will be called when Electron has finished
