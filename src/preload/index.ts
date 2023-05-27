@@ -1,8 +1,10 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
+export type AppAPI = { pull: (setter: (value: string) => void) => void }
+
 // Custom APIs for renderer
-const api = {
+const api: AppAPI = {
   pull: (setter: (value: string) => void): void => {
     electronAPI.ipcRenderer.on('timestamp-tick', (_: unknown, arg: unknown) => {
       setter(arg as string)
