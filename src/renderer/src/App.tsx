@@ -1,7 +1,7 @@
 import Versions from './components/Versions'
 import icons from './assets/icons.svg'
 import { Box } from '@mui/material'
-import React from 'react'
+
 import Clock from './components/Clock'
 import { TimerContextProvider } from './context/TimerContextProvider'
 

@@ -1,5 +1,5 @@
 import { Stack, Typography } from '@mui/material'
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { TimerContext } from '../context/TimerContextProvider'
 
 const Clock = (): JSX.Element => {
