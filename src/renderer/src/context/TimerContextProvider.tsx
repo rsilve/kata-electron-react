@@ -2,10 +2,10 @@ import { createSignal } from '@react-rxjs/utils'
 import { bind } from '@react-rxjs/core'
 import React from 'react'
 
-const [timer, setTimerValue] = createSignal<string>()
-const [useTimer] = bind(timer, new Date().toISOString())
+const [timer, setTimerValue] = createSignal<Frame>()
+const [useTimer] = bind(timer, { time: new Date().toISOString() })
 
-export const useTimerContext = (): string => {
+export const useTimerContext = (): Frame => {
   return useTimer()
 }
 

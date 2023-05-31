@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+import { Frame } from '../preload/Frame'
 
 type Listener = (value: string) => void
 export type Timer = {
@@ -21,7 +22,7 @@ export const timer = (mainWindow: BrowserWindow): Timer => {
   const instance = new SimpleTimer()
   setInterval(() => {
     const now = new Date().toISOString()
-    mainWindow.webContents.send('timestamp-tick', now)
+    mainWindow.webContents.send('timestamp-tick', { time: now } as Frame)
     instance.execute(now)
   }, 300)
   return instance
