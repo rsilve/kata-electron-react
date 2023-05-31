@@ -23,6 +23,6 @@ export const timer = (mainWindow: BrowserWindow): Timer => {
     const now = new Date().toISOString()
     mainWindow.webContents.send('timestamp-tick', now)
     instance.execute(now)
-  }, 1000)
+  }, 300)
   return instance
 }
