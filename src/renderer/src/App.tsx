@@ -4,8 +4,9 @@ import { Box } from '@mui/material'
 
 import Clock from './components/Clock'
 import { TimerContextProvider } from './context/TimerContextProvider'
+import React from 'react'
 
-function App(): JSX.Element {
+function App(): React.ReactElement {
   return (
     <Box padding={4}>
       <Versions></Versions>

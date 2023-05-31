@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Stack, Typography } from '@mui/material'
 
-function Versions(): JSX.Element {
+function Versions(): React.ReactElement {
   const [versions] = useState(window.electron.process.versions)
 
   return (

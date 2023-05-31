@@ -1,9 +1,9 @@
 import { Stack, Typography } from '@mui/material'
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useTimerContext } from '../context/TimerContextProvider'
 import dayjs from 'dayjs'
 
-const Clock = (): JSX.Element => {
+const Clock = (): React.ReactElement => {
   const context = useTimerContext()
   const formatted = useMemo(() => dayjs(context).format('HH:mm:ss'), [context])
 
