@@ -33,7 +33,7 @@ const Alarms = (): React.ReactElement => {
     <>
       <Stack direction={'row'} justifyContent={'center'}>
         <Stack>
-          <Grid container spacing={4}>
+          <Grid container spacing={5}>
             <Grid item xs={6}>
               <AlarmItem
                 alarm={alarms[0]}

@@ -30,7 +30,7 @@ const AlarmItem = ({
           <Typography noWrap={true}>{children}</Typography>
         </StyledText>
         <Typography variant={'body2'}>{alarm.time}</Typography>
-        <Box marginBottom={-2}>
+        <Box>
           <IconButton size={'small'} onClick={onSelect}>
             {(alarm.enabled && <Check />) || <Stop />}
           </IconButton>
