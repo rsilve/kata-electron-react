@@ -2,7 +2,8 @@ import { app, shell, BrowserWindow, Notification } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { timer } from './timer'
+import { installTimerLoop } from './installTimerLoop'
+import { installActionListener } from './installActionListener'
 
 function createWindow(): void {
   // Create the browser window.
@@ -35,12 +36,14 @@ function createWindow(): void {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  const timerInstance = timer(mainWindow)
+  const timerInstance = installTimerLoop(mainWindow)
   timerInstance.addEventListener((value) => {
-    if (value.indexOf('16:27:00') >= 0) {
+    if (value.indexOf('06:47:00') >= 0) {
       new Notification({ title: 'Test Notif', body: 'Great notif body, very useful' }).show()
     }
   })
+
+  installActionListener()
 }
 
 // This method will be called when Electron has finished

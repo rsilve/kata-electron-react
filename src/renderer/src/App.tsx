@@ -5,6 +5,7 @@ import { Box } from '@mui/material'
 import Clock from './components/Clock'
 import { TimerContextProvider } from './context/TimerContextProvider'
 import React from 'react'
+import Alarms from './components/Alarms'
 
 function App(): React.ReactElement {
   return (
@@ -15,6 +16,7 @@ function App(): React.ReactElement {
       </svg>
       <TimerContextProvider>
         <Clock />
+        <Alarms></Alarms>
       </TimerContextProvider>
     </Box>
   )
