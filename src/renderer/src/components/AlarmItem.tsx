@@ -1,8 +1,7 @@
 import { Box, IconButton, Stack, styled, Typography } from '@mui/material'
-import { Edit } from '@mui/icons-material'
+import { Check, Stop } from '@mui/icons-material'
 import React, { PropsWithChildren, useMemo } from 'react'
 import { Alarm } from '../services/alarms'
-import { grey } from '@mui/material/colors'
 
 type AlarmItemProps = {
   alarm: Alarm
@@ -28,15 +27,12 @@ const AlarmItem = ({
     <>
       <Stack direction="row" spacing={1} alignItems={'baseline'} justifyContent={'center'}>
         <StyledText>
-          <Typography>{children}</Typography>
+          <Typography noWrap={true}>{children}</Typography>
         </StyledText>
         <Typography variant={'body2'}>{alarm.time}</Typography>
-        <Typography variant={'body2'} color={grey[500]}>
-          {(alarm.enabled && 'On') || 'Off'}
-        </Typography>
         <Box marginBottom={-2}>
           <IconButton size={'small'} onClick={onSelect}>
-            <Edit />
+            {(alarm.enabled && <Check />) || <Stop />}
           </IconButton>
         </Box>
       </Stack>
