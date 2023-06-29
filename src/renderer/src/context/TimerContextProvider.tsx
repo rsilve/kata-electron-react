@@ -1,16 +1,27 @@
 import { createSignal } from '@react-rxjs/utils'
 import { bind } from '@react-rxjs/core'
 import React from 'react'
-import { Frame } from '../../../shared'
+import { AlarmsFrame, Frame, TimeFrame } from '../../../shared'
+import { filter, map } from 'rxjs'
 
-const [timer, setTimerValue] = createSignal<Frame>()
-const [useTimer] = bind<Frame>(timer, { time: new Date().toISOString(), timeOfTheDay: '' })
+const [frame, setFrameValue] = createSignal<Frame>()
+const [, frame$] = bind<Frame>(frame, { type: 'TimeFrame', time: new Date().toISOString() })
 
-export const useTimerContext = (): Frame => {
-  return useTimer()
-}
+export const [useTime] = bind(
+  frame$.pipe(
+    filter((value) => value.type === 'TimeFrame'),
+    map((value) => value as TimeFrame)
+  )
+)
+
+export const [useAlarms] = bind(
+  frame$.pipe(
+    filter((value) => value.type === 'AlarmsFrame'),
+    map((value) => value as AlarmsFrame)
+  )
+)
 
 export const TimerContextProvider = ({ children }: { children }): React.ReactElement => {
-  window.api.listen(setTimerValue)
+  window.api.listen(setFrameValue)
   return <>{children}</>
 }

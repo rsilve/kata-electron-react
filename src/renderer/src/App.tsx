@@ -6,6 +6,7 @@ import Clock from './components/Clock'
 import { TimerContextProvider } from './context/TimerContextProvider'
 import React from 'react'
 import Alarms from './components/Alarms'
+import { Subscribe } from '@react-rxjs/core'
 
 function App(): React.ReactElement {
   return (
@@ -14,10 +15,12 @@ function App(): React.ReactElement {
       <svg className="hero-logo" viewBox="0 0 900 300">
         <use xlinkHref={`${icons}#electron`} />
       </svg>
-      <TimerContextProvider>
-        <Clock />
-        <Alarms></Alarms>
-      </TimerContextProvider>
+      <Subscribe>
+        <TimerContextProvider>
+          <Clock />
+          <Alarms></Alarms>
+        </TimerContextProvider>
+      </Subscribe>
     </Box>
   )
 }

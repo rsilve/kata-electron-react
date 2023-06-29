@@ -1,5 +1,5 @@
 import { electronAPI } from '@electron-toolkit/preload'
-import { TIMESTAMP_CHANNEL } from './channels'
+import { FRAME_CHANNEL } from './channels'
 import { Action, Frame } from '../shared'
 
 export type AppAPI = {
@@ -9,8 +9,8 @@ export type AppAPI = {
 
 export const api: AppAPI = {
   listen: (setter: (value: Frame) => void) => {
-    electronAPI.ipcRenderer.removeAllListeners(TIMESTAMP_CHANNEL)
-    electronAPI.ipcRenderer.on(TIMESTAMP_CHANNEL, (_: unknown, arg: unknown) => {
+    electronAPI.ipcRenderer.removeAllListeners(FRAME_CHANNEL)
+    electronAPI.ipcRenderer.on(FRAME_CHANNEL, (_: unknown, arg: unknown) => {
       setter(arg as Frame)
     })
   },

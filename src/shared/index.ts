@@ -15,7 +15,21 @@ export type Action = {
   payload: unknown
 }
 
-export type Frame = {
+export type TimeFrame = {
+  type: 'TimeFrame'
   time: string
-  timeOfTheDay: string
+}
+
+export type AlarmsFrame = {
+  type: 'AlarmsFrame'
+  alarms: AlarmList
+}
+
+export type Frame = TimeFrame | AlarmsFrame
+
+export function isTimeFrame(frame: Frame): TimeFrame {
+  if (frame.type === 'TimeFrame') {
+    return frame
+  }
+  throw new Error('Guard rejection')
 }

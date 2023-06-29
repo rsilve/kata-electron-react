@@ -2,12 +2,13 @@ import { Grid, Stack } from '@mui/material'
 import React, { useCallback, useState } from 'react'
 import { SelectedAlarm } from './type'
 import AlarmForm from './AlarmForm'
-import { getAlarms, saveAlarms } from '../services/alarms'
+import { saveAlarms } from '../services/alarms'
 import AlarmItem from './AlarmItem'
 import { Alarm, AlarmList } from '../../../shared'
+import { useAlarms } from '../context/TimerContextProvider'
 
 const Alarms = (): React.ReactElement => {
-  const [alarms, setAlarms] = useState<AlarmList>(getAlarms())
+  const frame = useAlarms()
   const [alarmEdited, setAlarmEdited] = useState<SelectedAlarm>(undefined)
 
   const handleSelectAlarm = useCallback(
@@ -22,13 +23,12 @@ const Alarms = (): React.ReactElement => {
   const handleEdit = useCallback(
     (alarm: Alarm) => {
       if (alarmEdited !== undefined) {
-        const updated: AlarmList = [...alarms]
+        const updated: AlarmList = [...frame.alarms]
         updated[alarmEdited] = alarm
-        setAlarms(updated)
         saveAlarms(updated)
       }
     },
-    [alarms, setAlarms, alarmEdited]
+    [frame, alarmEdited]
   )
 
   return (
@@ -38,7 +38,7 @@ const Alarms = (): React.ReactElement => {
           <Grid container spacing={5}>
             <Grid item xs={6}>
               <AlarmItem
-                alarm={alarms[0]}
+                alarm={frame.alarms[0]}
                 selected={alarmEdited === 0}
                 onSelect={handleSelectAlarm(0)}
               >
@@ -47,7 +47,7 @@ const Alarms = (): React.ReactElement => {
             </Grid>
             <Grid item xs={6}>
               <AlarmItem
-                alarm={alarms[1]}
+                alarm={frame.alarms[1]}
                 selected={alarmEdited === 1}
                 onSelect={handleSelectAlarm(1)}
               >
@@ -60,7 +60,7 @@ const Alarms = (): React.ReactElement => {
       {alarmEdited !== undefined && (
         <Stack marginTop={2}>
           <AlarmForm
-            alarm={alarms[alarmEdited]}
+            alarm={frame.alarms[alarmEdited]}
             onEdit={handleEdit}
             toggleEdit={handleSelectAlarm(alarmEdited)}
           />
