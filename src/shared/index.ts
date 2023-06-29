@@ -27,9 +27,10 @@ export type AlarmsFrame = {
 
 export type Frame = TimeFrame | AlarmsFrame
 
-export function isTimeFrame(frame: Frame): TimeFrame {
-  if (frame.type === 'TimeFrame') {
-    return frame
-  }
-  throw new Error('Guard rejection')
+export function isTimeFrame(frame: Frame): frame is TimeFrame {
+  return frame.type === 'TimeFrame'
+}
+
+export function isAlarmFrame(frame: Frame): frame is AlarmsFrame {
+  return frame.type === 'AlarmsFrame'
 }
