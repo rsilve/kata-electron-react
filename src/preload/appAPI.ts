@@ -1,6 +1,6 @@
 import { electronAPI } from '@electron-toolkit/preload'
-import { Action, Frame } from './models'
 import { TIMESTAMP_CHANNEL } from './channels'
+import { Action, Frame } from '../shared'
 
 export type AppAPI = {
   listen: (setter: (value: Frame) => void) => void

@@ -1,12 +1,11 @@
-import { Alarm } from '../../preload/models'
+import { AlarmList, DEFAULT_ALARMS_LIST } from '../../shared'
 
-const alarms: Alarm[] = []
+let alarms: AlarmList = DEFAULT_ALARMS_LIST
 
-export const updateAlarm = (alarm: Alarm): void => {
-  if (alarms.filter((a) => a.time === alarm.time).length > 0) {
-    return
-  } else {
-    alarms.push(alarm)
-  }
-  console.log(alarms)
+export const updateAlarm = (alarmList: AlarmList): void => {
+  alarms = alarmList
+}
+
+export function getAlarmList(): AlarmList {
+  return [...alarms]
 }

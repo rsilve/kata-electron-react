@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron'
-import { Frame } from '../preload/frame'
 import dayjs from 'dayjs'
 import { TIMESTAMP_CHANNEL } from '../preload/channels'
+import { Frame } from '../shared'
 
 type Listener = (value: string) => void
 export type InstallTimerLoop = {
@@ -28,6 +28,6 @@ export const installTimerLoop = (mainWindow: BrowserWindow): InstallTimerLoop =>
     const timeOfTheDay = now.format('A')
     mainWindow.webContents.send(TIMESTAMP_CHANNEL, { time, timeOfTheDay } as Frame)
     instance.execute(time)
-  }, 300)
+  }, 1000)
   return instance
 }

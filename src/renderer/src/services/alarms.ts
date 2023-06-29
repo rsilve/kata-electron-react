@@ -1,13 +1,9 @@
-export type Alarm = {
-  time: string
-  enabled: boolean
-}
-
-export type AlarmList = [Alarm, Alarm]
+import { AlarmList, DEFAULT_ALARMS_LIST } from '../../../shared'
 
 export function getAlarms(): AlarmList {
-  return [
-    { time: '00:00', enabled: false },
-    { time: '00:00', enabled: false }
-  ]
+  return DEFAULT_ALARMS_LIST
+}
+
+export function saveAlarms(alarms: AlarmList): void {
+  window.api.action({ type: 'updateAlarm', payload: alarms })
 }

@@ -2,8 +2,9 @@ import { Grid, Stack } from '@mui/material'
 import React, { useCallback, useState } from 'react'
 import { SelectedAlarm } from './type'
 import AlarmForm from './AlarmForm'
-import { Alarm, AlarmList, getAlarms } from '../services/alarms'
+import { getAlarms, saveAlarms } from '../services/alarms'
 import AlarmItem from './AlarmItem'
+import { Alarm, AlarmList } from '../../../shared'
 
 const Alarms = (): React.ReactElement => {
   const [alarms, setAlarms] = useState<AlarmList>(getAlarms())
@@ -24,6 +25,7 @@ const Alarms = (): React.ReactElement => {
         const updated: AlarmList = [...alarms]
         updated[alarmEdited] = alarm
         setAlarms(updated)
+        saveAlarms(updated)
       }
     },
     [alarms, setAlarms, alarmEdited]
