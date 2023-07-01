@@ -41,9 +41,9 @@ async function createWindow(): Promise<void> {
   }
 
   const eventLoop = createEventLoop()
-  installTimerLoop(eventLoop, mainWindow)
+  const timerLoop = installTimerLoop(eventLoop, mainWindow)
   installActionListener(mainWindow)
-  installNotificationLoop(eventLoop, mainWindow)
+  installNotificationLoop(timerLoop, mainWindow)
 }
 
 // This method will be called when Electron has finished
