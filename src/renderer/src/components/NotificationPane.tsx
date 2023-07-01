@@ -14,6 +14,9 @@ const NotificationPane = (): React.ReactElement => {
   useEffect(() => {
     if (notification) {
       setEnabled(true)
+      setTimeout(() => {
+        setEnabled(false)
+      }, 10000)
     }
   }, [notification])
 
@@ -21,7 +24,7 @@ const NotificationPane = (): React.ReactElement => {
     setEnabled(false)
   }
 
-  return <Stack>{enabled && <StopButton handleStop={handleStop} />}</Stack>
+  return <Stack paddingTop={2}>{enabled && <StopButton handleStop={handleStop} />}</Stack>
 }
 
 export default NotificationPane

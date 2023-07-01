@@ -1,7 +1,7 @@
 import { IconButton, Stack, Switch, TextField, Typography } from '@mui/material'
 import React from 'react'
-import { Alarm } from '../services/alarms'
 import { Close } from '@mui/icons-material'
+import { Alarm } from '@shared'
 
 type AlarmFormProps = {
   alarm: Alarm
@@ -12,12 +12,14 @@ const AlarmForm = ({ alarm, onEdit, toggleEdit }: AlarmFormProps): React.ReactEl
   function handleEnabledChange(event): void {
     const updated: Alarm = { ...alarm }
     updated.enabled = event.target.checked
+    updated.time = updated.enabled ? updated.time : '--:--'
     onEdit(updated)
   }
 
   const handleTimeChange = (event): void => {
     const updated: Alarm = { ...alarm }
     updated.time = event.target.value
+    updated.enabled = updated.time !== '--:--'
     onEdit(updated)
   }
   return (
