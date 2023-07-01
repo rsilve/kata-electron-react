@@ -7,6 +7,7 @@ import { TimerContextProvider } from './context/TimerContextProvider'
 import React from 'react'
 import Alarms from './components/Alarms'
 import { Subscribe } from '@react-rxjs/core'
+import NotificationPane from './components/NotificationPane'
 
 function App(): React.ReactElement {
   return (
@@ -19,6 +20,7 @@ function App(): React.ReactElement {
         <TimerContextProvider>
           <Clock />
           <Alarms></Alarms>
+          <NotificationPane />
         </TimerContextProvider>
       </Subscribe>
     </Box>

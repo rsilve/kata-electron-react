@@ -6,8 +6,8 @@ export type Alarm = {
 export type AlarmList = [Alarm, Alarm]
 
 export const DEFAULT_ALARMS_LIST: AlarmList = [
-  { time: '00:00', enabled: false },
-  { time: '00:00', enabled: false }
+  { time: '--:--', enabled: false },
+  { time: '--:--', enabled: false }
 ]
 
 export type Action = {
@@ -24,8 +24,11 @@ export type AlarmsFrame = {
   type: 'AlarmsFrame'
   alarms: AlarmList
 }
+export type NotificationFrame = {
+  type: 'NotificationFrame'
+}
 
-export type Frame = TimeFrame | AlarmsFrame
+export type Frame = TimeFrame | AlarmsFrame | NotificationFrame
 
 export function isTimeFrame(frame: Frame): frame is TimeFrame {
   return frame.type === 'TimeFrame'
@@ -33,4 +36,8 @@ export function isTimeFrame(frame: Frame): frame is TimeFrame {
 
 export function isAlarmFrame(frame: Frame): frame is AlarmsFrame {
   return frame.type === 'AlarmsFrame'
+}
+
+export function isNotificationFrame(frame: Frame): frame is NotificationFrame {
+  return frame.type === 'NotificationFrame'
 }

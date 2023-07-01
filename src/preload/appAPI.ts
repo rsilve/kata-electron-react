@@ -1,5 +1,5 @@
 import { electronAPI } from '@electron-toolkit/preload'
-import { FRAME_CHANNEL } from './channels'
+import { ACTION_CHANNEL, FRAME_CHANNEL } from './channels'
 import { Action, Frame } from '../shared'
 
 export type AppAPI = {
@@ -15,6 +15,6 @@ export const api: AppAPI = {
     })
   },
   action: (action: Action) => {
-    electronAPI.ipcRenderer.send('action', action)
+    electronAPI.ipcRenderer.send(ACTION_CHANNEL, action)
   }
 }
